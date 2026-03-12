@@ -97,7 +97,7 @@ Our architecture follows a rigorous **continuous intelligence loop**, transformi
 
 #### 2. Localized Heuristic Scoring (The Brain)
 Once structured, the backend executes three deterministic algorithms to quantify personhood:
-*   **Skill Strength Score (SSS)**: Maps तकनीकी competency (Beginner, Intermediate, Advanced) onto rigid scalar weights to calculate absolute professional power.
+*   **Skill Strength Score (SSS)**: Maps technical competency (Beginner, Intermediate, Advanced) onto rigid scalar weights to calculate absolute professional power.
 *   **Career Alignment Engine (CAE)**: Uses vector intersection geometry to mathematically score how well a user's active skill subset matches established industry role requirements.
 *   **Digital Twin Confidence Index (DTCI)**: A meta-score tracking data density and optical parsing reliability.
 
