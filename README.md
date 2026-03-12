@@ -42,6 +42,53 @@ Connect your capabilities to global opportunity. Our engine provides:
 
 ---
 
+## 📐 System Architecture
+
+The AI Personal Digital Twin utilizes a **Decoupled multi-tier Architecture** designed for high modularity and low-latency inference.
+
+```mermaid
+graph TD
+    subgraph Client_Layer [Face: React Frontend]
+        UI[User Dashboard]
+        Charts[Analytics & Charts]
+        SimLab[Simulation Lab]
+    end
+
+    subgraph Logic_Layer [Brain: Node.js / Express]
+        API[RESTful API Gateway]
+        Auth[JWT Security]
+        Heuristics[Heuristic Scoring Engines]
+    end
+
+    subgraph Intel_Layer [Intelligence: AI & ML]
+        AGW{AI Inference Gateway}
+        Gemini[Google Gemini 1.5]
+        OpenAI[OpenAI gpt-4-turbo]
+        
+        MLE[ML Classification Engine]
+        RF[Random Forest Ensemble]
+        KNN[K-Nearest Neighbors]
+    end
+
+    subgraph Data_Layer [Memory: MongoDB]
+        Users[(User Identity)]
+        Twins[(Digital Twin JSON)]
+    end
+
+    %% Data Flow
+    UI --> API
+    API --> Auth
+    Auth --> Heuristics
+    Heuristics <--> Gemini
+    Heuristics <--> OpenAI
+    API <--> RF
+    API <--> KNN
+    API <--> Twins
+    Twins <--> Users
+```
+
+---
+
 ## 📐 Scholarly Foundation & Result Metrics
 
 This platform is powered by the research documented in our **Official IEEE Paper** (`AI_Digital_Twin_Paper.tex`). 
