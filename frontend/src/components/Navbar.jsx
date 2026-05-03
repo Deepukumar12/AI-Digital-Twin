@@ -59,12 +59,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30 md:ml-64 transition-all">
+    <nav className={`bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30 ${token ? 'md:ml-64' : ''} transition-all`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Brand - Mobile Only now, as Sidebar has the brand */}
           <div className="flex md:hidden flex-shrink-0 items-center">
-            <Link to="/dashboard" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="bg-primary-600 rounded-lg p-1.5 shadow-sm">
                 <BrainCircuit className="h-5 w-5 text-white" />
               </div>

@@ -20,10 +20,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  subscriptionPlan: {
+  role: {
     type: String,
-    default: 'Free Startup Tier'
-  }
+    enum: ['user', 'admin'],
+    default: 'user',
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

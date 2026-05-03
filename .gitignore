@@ -20,6 +20,7 @@ obj/
 # Backend/Frontend specific envs
 backend/.env
 frontend/.env
+admin/.env
 
 # --- OS & IDE Junk ---
 .DS_Store

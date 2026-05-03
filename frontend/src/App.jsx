@@ -12,6 +12,7 @@ import Prediction from './pages/Prediction';
 import Market from './pages/Market';
 import Simulation from './pages/Simulation';
 import Settings from './pages/Settings';
+import Landing from './pages/Landing';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -19,9 +20,9 @@ import { Toaster } from 'react-hot-toast';
 
 function AppContent() {
   const location = useLocation();
-  const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
+  const isPublicRoute = location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/';
   const token = localStorage.getItem('token');
-  const showSidebar = !isAuthRoute && token;
+  const showSidebar = !isPublicRoute && token;
 
   return (
     <div className="min-h-screen bg-appBg dark:bg-gray-900 flex flex-col font-sans antialiased text-textPrimary dark:text-gray-100 transition-colors">
@@ -29,8 +30,11 @@ function AppContent() {
       <Navbar />
       <Toaster position="top-right" reverseOrder={false} toastOptions={{ className: 'dark:bg-gray-800 dark:text-white' }} />
       <main className={`flex-1 transition-all ${showSidebar ? 'md:ml-64' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!isPublicRoute ? 'py-8' : ''} w-full`}>
           <Routes>
+            {/* Public Landing Page */}
+            <Route path="/" element={<Landing />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -48,7 +52,7 @@ function AppContent() {
             <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
 
             {/* Default Route */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </main>

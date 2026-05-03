@@ -25,10 +25,10 @@ exports.register = async (req, res) => {
     await user.save();
 
     // Create token
-    const payload = { userId: user._id };
+    const payload = { userId: user._id, role: user.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_jwt_secret_key_here', { expiresIn: '1d' });
 
-    res.status(201).json({ token, userId: user._id });
+    res.status(201).json({ token, userId: user._id, role: user.role });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error during registration' });
@@ -52,10 +52,10 @@ exports.login = async (req, res) => {
     }
 
     // Create token
-    const payload = { userId: user._id };
+    const payload = { userId: user._id, role: user.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_jwt_secret_key_here', { expiresIn: '1d' });
 
-    res.json({ token, userId: user._id });
+    res.json({ token, userId: user._id, role: user.role });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error during login' });
@@ -87,7 +87,7 @@ exports.updateProfile = async (req, res) => {
     if (bio) user.bio = bio;
 
     await user.save();
-    res.json({ message: 'Profile updated successfully', user: { email: user.email, name: user.name, bio: user.bio, subscriptionPlan: user.subscriptionPlan } });
+    res.json({ message: 'Profile updated successfully', user: { email: user.email, name: user.name, bio: user.bio } });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error updating profile' });
@@ -130,23 +130,3 @@ exports.updatePassword = async (req, res) => {
   }
 };
 
-exports.upgradeSubscription = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Process upgrade natively
-    user.subscriptionPlan = 'Enterprise';
-    await user.save();
-
-    res.json({
-      message: 'Successfully upgraded to Enterprise tier!',
-      subscriptionPlan: user.subscriptionPlan
-    });
-  } catch (error) {
-    console.error('[AuthController] Subscription Upgrade Error:', error);
-    res.status(500).json({ message: 'Server error during subscription upgrade' });
-  }
-};

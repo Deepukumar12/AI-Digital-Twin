@@ -9,6 +9,7 @@ const chatRoutes = require('./routes/chatRoutes');
 const jobMarketRoutes = require('./routes/jobMarketRoutes');
 const careerPredictionRoutes = require('./routes/careerPredictionRoutes');
 const twinRoutes = require('./routes/twinRoutes'); // Added twinRoutes
+const adminRoutes = require('./routes/adminRoutes');
 
 // Services
 const { initMemory } = require('./services/memoryService');
@@ -31,6 +32,7 @@ app.use('/api/resume', resumeRoutes);
 app.use('/api/job-market', jobMarketRoutes);
 app.use('/api/career', careerPredictionRoutes); // Mount self-assessment and prediction logic
 app.use('/api', twinRoutes); // Mount twin and chat routes
+app.use('/api/admin', adminRoutes); // Mount admin routes
 
 // Database connection
 const PORT = process.env.PORT || 5000;

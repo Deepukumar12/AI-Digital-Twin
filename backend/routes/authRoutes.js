@@ -28,10 +28,6 @@ router.put('/me', authMiddleware, authController.updateProfile);
 // @access  Private
 router.put('/password', authMiddleware, authController.updatePassword);
 
-// @route   PUT api/auth/subscription
-// @desc    Upgrade user subscription plan to Enterprise
-// @access  Private
-router.put('/subscription', authMiddleware, authController.upgradeSubscription);
 
 // @route   POST api/auth/logout
 // @desc    Logout user
